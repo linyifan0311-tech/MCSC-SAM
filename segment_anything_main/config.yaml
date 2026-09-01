@@ -1,0 +1,52 @@
+# --- 数据相关配置 ---
+data:
+  # 数据集根目录 (包含 train/ 和 val/ 子目录)
+  root_dir: I:\baisha\data_all
+  image_size: 1024
+
+# --- 模型相关配置 ---
+model:
+  # SAM模型类型 (vit_b, vit_l, vit_h)
+  type: vit_b
+  # 预训练SAM模型权重文件路径
+  checkpoint_path: sam_vit_b_01ec64.pth
+  # 是否冻结图像编码器 (true/false)
+  freeze_image_encoder: true
+
+# --- 训练相关配置 ---
+training:
+  # 训练的总轮数
+  epochs: 30
+  # 批量大小
+  batch_size: 4
+  # 目标有效批量大小 (用于梯度累积)
+  target_effective_batch_size: 16
+  # 初始学习率
+  learning_rate: 0.00001
+  # 权重衰减 (L2正则化)
+  weight_decay: 0.01
+  # 学习率调度器的步长
+  lr_scheduler_step_size: 10
+  # 学习率调度器的衰减因子
+  lr_scheduler_gamma: 0.1
+  # 数据加载时使用的线程数
+  num_workers: 0
+
+# --- 其他配置 ---
+other:
+  # 模型 checkpoint 和日志的保存目录
+  output_dir: I:\baisha\2025.10.27\ground2\train\result_weight\sam1\dataset2\test
+  # 每隔多少轮保存一次 checkpoint (0表示不按轮次保存，只保存最佳)
+  save_checkpoint_interval: 3
+  # 是否使用CUDA (true/false)，如果未设置，脚本会自动检测
+  use_cuda: true
+# 可视化结果保存目录
+  visualization_dir: I:\baisha\2025.10.27\ground2\train\result_weight\sam1\dataset2\test\visualization
+  # 每隔多少轮保存一次可视化结果 (例如，5代表每5轮保存一次)
+  visualization_interval: 3
+# 每次可视化时保存的样本数量
+  visualization_samples: 5
+  # 早停机制: 耐心轮数
+  early_stopping_patience: 3
+  # 早停机制: 最小变化量
+  early_stopping_min_delta: 0.001
